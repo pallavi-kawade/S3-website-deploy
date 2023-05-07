@@ -46,20 +46,4 @@ resource "aws_s3_object" "object" {
 }
 
 
-  # Enable versioning
-  versioning {
-    enabled = true
-  }
-
-  # Configure static website hosting
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
-  }
-
-  # Configure logging to a separate bucket
-  logging {
-    target_bucket = "example-logs-bucket"
-    target_prefix = "s3-logs/"
-  }
 

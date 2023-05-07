@@ -1,3 +1,26 @@
 //This is a Terratest File.
+resource "aws_codebuild_webhook" "my_webhook" {
+    filter_groups = [
+      {
+        filters = [
+          {
+            type  = "HEAD_REF"
+            pattern = "refs/heads/main"
+          },
+          {
+            type  = "FILE_PATH"
+            pattern = "about.html"
+          }
+        ]
+      }
+    ]
+  
+    project_name = aws_codebuild_project.my_project.name
+  
+    authentication {
+      type = "OAUTH"
+    }
+  }
+  
 
 <h1>this is about .html</h1>
