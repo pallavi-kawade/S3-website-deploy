@@ -1,0 +1,14 @@
+name: S3 Static Website Deploy
+on:
+  push:
+    branches:
+    - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest 
+    steps:
+    - name: Checkout 
+      uses: actions/checkout@v1
+
+    - name: Deploy static website to S3 bucket 
+      run: aws s3 sync . s3://mybucket-website1-static --delete
