@@ -24,7 +24,7 @@ variable "username" {
 variable "bucket_name" {
   description = "Name of the S3 bucket"
   type        = string
-  default     = "awsssss-buckettttttttttttt-static"
+  default     = "aws-bucket-static-website-example1"
 }
 
 
