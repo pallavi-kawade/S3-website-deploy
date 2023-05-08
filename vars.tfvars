@@ -1,7 +1,7 @@
 # project = "awss3bucketwebsitehhhhhhhhhhhhhhhhhhhh"
 # environment = "dev"
 # username = "pallavi-kawade"
-bucket_name = "awsssss-buckettttttt-static"
+bucket_name = "aws-bucket-static-website"
 # variable "bucket_name" {
 #   description = "Name of the S3 bucket"
 #   type        = string

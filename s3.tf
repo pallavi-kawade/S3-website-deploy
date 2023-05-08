@@ -20,6 +20,12 @@ resource "aws_s3_bucket" "create_bucket" {
 resource "aws_s3_bucket_acl" "bucket_acl" {
   bucket = aws_s3_bucket.create_bucket.id
   acl    = "public-read"
+
+  # # Uncheck "Block all public access"
+  # block_public_acls       = false
+  # ignore_public_acls      = false
+  # block_public_policy     = false
+  # restrict_public_buckets = false
 }
 
 
