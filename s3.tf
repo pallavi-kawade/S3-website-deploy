@@ -6,28 +6,10 @@ resource "aws_s3_bucket" "create_bucket" {
     Name = format("%v-%v-s3Bucket", var.project, var.environment)
   }
 }
-
-# provider "aws" {
-#   region = var.aws_region
-# }
-
-# resource "aws_s3_bucket" "example" {
-#   bucket = var.bucket_name
-#   acl    = "private"
-# }
-
-
 resource "aws_s3_bucket_acl" "bucket_acl" {
   bucket = aws_s3_bucket.create_bucket.id
   acl    = "private"
-
-#   # # Uncheck "Block all public access"
-#  block_public_acls       = false
-#  ignore_public_acls      = false
-# block_public_policy     = false
-# restrict_public_buckets = false
- }
-
+}
 
 # Attaching Policy to S3 Bucket
 resource "aws_s3_bucket_policy" "bucket_policy" {
@@ -50,6 +32,3 @@ resource "aws_s3_object" "object" {
   ]
 
 }
-
-
-

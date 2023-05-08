@@ -14,17 +14,9 @@ variable "username" {
   type        = string
 }
 
-# variable "bucket_name" {
-#   description = "Name of the S3 bucket"
-#   type        = string
-#   #value = "aws-s3-bucket-static-website"
-#   bucket_name = "awsssss-buckettttttttttttt-static"
-
-# }
 variable "bucket_name" {
   description = "Name of the S3 bucket"
   type        = string
-  default     = "aws-bucket-static-website-example1"
 }
 
 
