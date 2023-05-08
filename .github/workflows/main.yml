@@ -1,48 +1,25 @@
-name: S3 Static Website Deploy
+name: S3 Static Website Pipeline
+
 on:
   push:
     branches:
-    - main
+      - main
+
+env:
+  AWS_REGION: us-east-1
+
 jobs:
-  deploy:
-    runs-on: ubuntu-latest 
-    steps:
-    - name: Checkout 
-      uses: actions/checkout@v1
-
-      name: 'Terraform'
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-
-permissions:
-  contents: read
-
- jobs:
-  terraform:
-    name: 'Terraform'
+  build:
     runs-on: ubuntu-latest
-    environment: production
-     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: terraform init
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt -check
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install awscli
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      run: terraform plan -input=false
-
-      # On push to "main", build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-    - name: Terraform Apply
-     # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-      run: terraform apply -auto-approve # -input=false
-      
-    
-    - name: Deploy static website to S3 bucket 
-      run: aws s3 sync . s3://mybucket-website1-static --delete
+      - name: Deploy to S3
+        run: |
+          aws s3 sync . s3://aws-bucket-static-website-example1 --delete --exclude '*.git*' --exclude '*.github*'
