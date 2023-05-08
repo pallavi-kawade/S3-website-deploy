@@ -10,8 +10,7 @@ jobs:
     - name: Checkout 
       uses: actions/checkout@v1
 
-      
-name: 'Terraform'
+      name: 'Terraform'
 
 on:
   push:
