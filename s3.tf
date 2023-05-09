@@ -9,13 +9,16 @@ resource "aws_s3_bucket" "create_bucket" {
 resource "aws_s3_bucket_acl" "bucket_acl" {
   bucket = aws_s3_bucket.create_bucket.id
   acl    = "public-read"
-  
-  rule {
-    id              = "object-owner-rule"
-    status          = "Enabled"
-    prefix          = ""
-    filter          = ""
-    object_ownership = "BucketOwnerPreferred"
+
+ object_lock_configuration {
+    object_lock_enabled = "Enabled"
+
+    rule {
+      default_retention {
+        mode = "GOVERNANCE"
+        days = 30
+      }
+    }
   }
 
 }
