@@ -9,6 +9,15 @@ resource "aws_s3_bucket" "create_bucket" {
 resource "aws_s3_bucket_acl" "bucket_acl" {
   bucket = aws_s3_bucket.create_bucket.id
   acl    = "public-read"
+  
+  rule {
+    id              = "object-owner-rule"
+    status          = "Enabled"
+    prefix          = ""
+    filter          = ""
+    object_ownership = "BucketOwnerPreferred"
+  }
+
 }
 
 # rule {
