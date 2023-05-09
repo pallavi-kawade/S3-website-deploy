@@ -12,6 +12,8 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws configure set region us-east-1
+  CLI_CONFIG_CREDENTIALS_TOKEN: ${{secrets.TF_API_TOKEN}}
+
 
 
 jobs:
@@ -28,15 +30,15 @@ jobs:
           terraform_version: v1.4.6
           
         
-      - name: Configure AWS CLI
-        run: |
-           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-           aws configure set region us-east-1
-      # Other steps in your workflow...
+#       - name: Configure AWS CLI
+#         run: |
+#            aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+#            aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#            aws configure set region us-east-1
+#       # Other steps in your workflow...
 
       - name: Terraform Init
-        run: terraform init -backend-config="bucket=tf-file-store-bucket"
+        run: terraform init -backend-config="credentials_token=${{ secrets.TF_API_TOKEN }}"
 
       - name: Terraform Validate
         run: terraform validate
