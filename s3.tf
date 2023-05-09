@@ -11,9 +11,9 @@ resource "aws_s3_bucket_acl" "bucket_acl" {
   acl    = "public-read"
 }
 
-rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
+# rule {
+#     object_ownership = "BucketOwnerPreferred"
+#   }
 
 # Attaching Policy to S3 Bucket
 resource "aws_s3_bucket_policy" "bucket_policy" {
