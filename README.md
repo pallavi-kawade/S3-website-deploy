@@ -52,11 +52,6 @@ about.html file is used for testing purpose.
 
 ## Development
 
-### Prerequisites
-
-- [terraform](https://learn.hashicorp.com/terraform/getting-started/install#installing-terraform)
-- [terraform-docs](https://github.com/segmentio/terraform-docs)
-
 
 ## ###  Prerequisites for terratest and HTML report generation
 
@@ -68,3 +63,14 @@ about.html file is used for testing purpose.
     export key=<key_name>
 
     export region=<bucket_region>
+    
+2. On Local 
+
+   aws configure 
+          export key=<key_name>
+          SET AWS_DEFAULT_REGION=<bucket_region>
+ 
+
+
+    #Using Github Action Perform Pipeline 
+      
