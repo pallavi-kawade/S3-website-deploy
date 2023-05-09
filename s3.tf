@@ -6,11 +6,12 @@ resource "aws_s3_bucket" "create_bucket" {
     Name = format("%v-%v-s3Bucket", var.project, var.environment)
   }
 }
-resource "aws_s3_bucket_acl" "bucket_acl" {
-  bucket = aws_s3_bucket.create_bucket.id
-  acl    = "private"
 
-}
+# resource "aws_s3_bucket_acl" "bucket_acl" {
+#   bucket = aws_s3_bucket.create_bucket.id
+#   acl    = "private"
+
+# }
 
 # rule {
 #     object_ownership = "BucketOwnerPreferred"
