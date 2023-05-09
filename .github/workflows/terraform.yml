@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Terraform Init
-        run: terraform init 
+        run: terraform init -var-file vars.tfvars
 
       - name: Terraform Validate
         run: terraform validate
