@@ -11,10 +11,7 @@ on:
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws configure set region us-east-1
-  CLI_CONFIG_CREDENTIALS_TOKEN: ${{secrets.TF_API_TOKEN}}
-
-
+  aws-region: ap-south-1
 
 jobs:
   terraform:
@@ -27,7 +24,9 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: v1.4.6
+                    cli_confi_crenditials_token: ${{secrets.TF_API_TOKEN}}
+
+          
           
         
 #       - name: Configure AWS CLI
