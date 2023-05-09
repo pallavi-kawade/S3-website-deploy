@@ -37,7 +37,7 @@ jobs:
 
 
       - name: Terraform Init
-        run: terraform init -reconfigure
+        run: terraform init -backend-config="bucket=tf-file-store-bucket"
 
       - name: Terraform Validate
         run: terraform validate
