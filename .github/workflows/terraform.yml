@@ -38,7 +38,7 @@ jobs:
 #       # Other steps in your workflow...
 
       - name: Terraform Init
-        run: terraform init -backend-config="credentials_token=${{ secrets.TF_API_TOKEN }}"
+        run: terraform init
 
       - name: Terraform Validate
         run: terraform validate
