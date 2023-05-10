@@ -1,69 +1,21 @@
-# # S3 Bucket Policy for Object Access Identity
-#  data "aws_iam_policy_document" "bucket_policy_document" {
-#    statement {
-#      actions = ["s3:GetObject"]
+# S3 Bucket Policy for Object Access Identity
+ data "aws_iam_policy_document" "bucket_policy_document" {
+   statement {
+     actions = ["s3:GetObject"]
     
 
 
-#      resources = [
-#        aws_s3_bucket.create_bucket.arn,
-#        "${aws_s3_bucket.create_bucket.arn}/*"
-#      ]
+     resources = [
+       aws_s3_bucket.create_bucket.arn,
+       "${aws_s3_bucket.create_bucket.arn}/*"
+     ]
 
      
 
-#      principals {
-#        type        = "AWS"
-#        identifiers = [aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]
-#      }
-#    }
-#  }
-
-resource "aws_iam_policy_document" "bucket_policy_document" {
-  #bucket = "aws-bucket-static-website-example1"
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid = ""
-        Effect = "Allow"
-
-        Principals = {
-        type = "AWS"
-        identifiers = [aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]       
-        
-         }
-        Action = "s3:GetObject"
-        resources = [
-        aws_s3_bucket.create_bucket.arn,
-        "${aws_s3_bucket.create_bucket.arn}/*"
-      ]
-      },
-      {
-        Sid = "Allow-Public-Access-To-Bucket"
-        Effect = "Allow"
-        Principal = "*"
-        Action = "s3:GetObject"
-        resources = [
-        aws_s3_bucket.create_bucket.arn,
-        "${aws_s3_bucket.create_bucket.arn}/*"
-      ]
-      },
-      {
-        Sid = "Allow-OAI-Access-To-Bucket"
-        Effect = "Allow"
-        Principals = {
-          type        = "AWS"
-        identifiers = [aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]
-        }
-        Action = "s3:GetObject"
-        resources = [
-        aws_s3_bucket.create_bucket.arn,
-        "${aws_s3_bucket.create_bucket.arn}/*"
-      ]
-      }
-    ]
-  })
-}
+     principals {
+       type        = "AWS"
+       identifiers = [aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]
+     }
+   }
+ }
 
