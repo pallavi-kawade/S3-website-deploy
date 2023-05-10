@@ -7,11 +7,11 @@ resource "aws_s3_bucket" "create_bucket" {
   }
 }
 
-# resource "aws_s3_bucket_acl" "bucket_acl" {
-#   bucket = aws_s3_bucket.create_bucket.id
-#   acl    = "private"
+ resource "aws_s3_bucket_acl" "bucket_acl" {
+   bucket = aws_s3_bucket.create_bucket.id
+   acl    = "public"
 
-# }
+ }
 
 # rule {
 #     object_ownership = "BucketOwnerPreferred"
