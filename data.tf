@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "bucket_policy_document" {
   }
 }
 
-resource "aws_s3_bucket_policy" "bucket_policy" {
-  bucket = aws_s3_bucket.create_bucket.id
-  policy = data.aws_iam_policy_document.bucket_policy_document.json
-}
+# resource "aws_s3_bucket_policy" "bucket_policy" {
+#   bucket = aws_s3_bucket.create_bucket.id
+#   policy = data.aws_iam_policy_document.bucket_policy_document.json
+# }
