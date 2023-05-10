@@ -14,6 +14,9 @@ env:
   AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
   AWS_REGION: us-east-1
 
+  run: |
+    aws s3 sync s3://aws-bucket-static-website-example1
+
 
 jobs:
   terraform:
@@ -34,3 +37,4 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply  -var-file vars.tfvars -auto-approve
+
