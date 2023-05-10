@@ -7,21 +7,21 @@ resource "aws_s3_bucket" "create_bucket" {
   }
 }
 
- resource "aws_s3_bucket_acl" "bucket_acl" {
-   bucket = aws_s3_bucket.create_bucket.id
-   acl    = "public-read"
+# resource "aws_s3_bucket_acl" "bucket_acl" {
+#   bucket = aws_s3_bucket.create_bucket.id
+#   acl    = "private"
 
- }
+# }
 
 # rule {
 #     object_ownership = "BucketOwnerPreferred"
 #   }
 
 # Attaching Policy to S3 Bucket
-# resource "aws_s3_bucket_policy" "bucket_policy" {
-#   bucket = aws_s3_bucket.create_bucket.id
-#   policy = data.aws_iam_policy_document.bucket_policy_document.json
-# }
+resource "aws_s3_bucket_policy" "bucket_policy" {
+  bucket = aws_s3_bucket.create_bucket.id
+  policy = data.aws_iam_policy_document.bucket_policy_document.json
+}
 
 resource "aws_s3_object" "object" {
 
