@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools {
+        tool name: 'Terraform', type: 'terraform'
+    }
+    
 
     stages {
         stage('checkout') {
