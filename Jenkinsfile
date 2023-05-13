@@ -4,7 +4,20 @@ pipeline {
         tool name: 'Terraform', type: 'terraform'
     }
     
+    stages {
+        stage('AWS demo') {
+            steps {
+                withCredentials([[
+                    $class:"AmazonWebServicesCredentialsBinding",
+                    credentialsID:"aws-jenkins-demo",
+                    accessKeyVariable:"AWS_ACCESS_KEY_ID",
+                    accessKeyVariable:"AWS_SECRET_ACCESS_KEY",
+                        sh "aws s3 ls"
 
+                ]])
+            }
+        }
+    }
     stages {
         stage('checkout') {
             steps {
