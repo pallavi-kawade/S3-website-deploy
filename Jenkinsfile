@@ -8,7 +8,7 @@
     stages {
       stage('fetch_latest_code') {
         steps {
-          git credentialsId: '142d0ded-f0d4-41ef-9cf3-08d313aa6bd8', url: 'https://github.com/PrashantBhatasana/terraform-jenkins-ec2'
+          git credentialsId: '142d0ded-f0d4-41ef-9cf3-08d313aa6bd8', url: 'https://github.com/pallavi-kawade/S3-website-deploy.git'
         }
       }
 
