@@ -1,55 +1,36 @@
-pipeline {
-    agent any
-    tools {
-        tool name: 'Terraform', type: 'terraform'
+  pipeline {
+    agent {
+      node {
+        label "master"
+      } 
     }
-    
+
     stages {
-        stage('AWS demo') {
-            steps {
-                withCredentials([[
-                    $class:"AmazonWebServicesCredentialsBinding",
-                    credentialsID:"aws-jenkins-demo",
-                    accessKeyVariable:"AWS_ACCESS_KEY_ID",
-                    accessKeyVariable:"AWS_SECRET_ACCESS_KEY",
-                        sh "aws s3 ls"
+      stage('fetch_latest_code') {
+        steps {
+          git credentialsId: '142d0ded-f0d4-41ef-9cf3-08d313aa6bd8', url: 'https://github.com/PrashantBhatasana/terraform-jenkins-ec2'
+        }
+      }
 
-                ]])
-            }
-        }
-    
-     
-        
-        stage('Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: 'master']],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [],
-                    submoduleCfg: [],
-                    userRemoteConfigs: [[url: 'https://github.com/pallavi-kawade/S3-website-deploy.git']]
-                ])
-            }
-        }
-    
-    
-        stage('init') {
-            steps {
-                sh ('terraform init')
-            }
-        }
-        
-        stage('plan') {
-            steps {
-                sh ('terraform plan')
-            }
-        }
-        
-        stage('apply') {
-            steps {
-                sh ('terraform apply')
-            }
-        }
-    }
+      stage('TF Init&Plan') {
+        steps {
+          sh 'terraform init'
+          sh 'terraform plan'
+        }      
+      }
 
+      stage('Approval') {
+        steps {
+          script {
+            def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
+          }
+        }
+      }
+
+      stage('TF Apply') {
+        steps {
+          sh 'terraform apply -input=false'
+        }
+      }
+    } 
+  }
